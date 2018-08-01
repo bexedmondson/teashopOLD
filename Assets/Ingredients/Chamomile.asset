@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: Chamomile
   m_EditorClassIdentifier: 
   itemName: Chamomile
-  stressRelief: 2
+  stressRelief: 0
   insomniaRelief: 4

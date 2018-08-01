@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "TeaShop/Customer")]
-public class Customer : ScriptableObject 
+public class Customer : MonoBehaviour 
 {   
 	public string firstName;
 
@@ -16,6 +16,10 @@ public class Customer : ScriptableObject
     public string firstEnquiry;
 
 	public string thankYou;
+
+	public bool beenServed;
+
+	public bool successfulTea;
 
 	public bool IsValid() //TODO: move this to be an editor check instead
 	{

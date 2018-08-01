@@ -37,10 +37,16 @@ public class Game : MonoBehaviour
 	public Button greenTeaButton;
 	public Button rooibosButton;
 	public Button chamomileButton;
+
+	private Color selectedColour = new Color(0.55f, 0.82f, 0.96f);
+    private Color unselectedColour = new Color(1f, 1f, 1f);
     
 	private Ingredient chosenIngredient = null;
 
 	public Button teaChosenButton;
+
+	public GameObject resultScreen;
+	public Text resultText;
 
 	void Start()
 	{
@@ -48,24 +54,25 @@ public class Game : MonoBehaviour
 		ingredientLibrary = GetComponent<IngredientLibrary>();
 
 		if (customerLibrary.IsValid() && ingredientLibrary.IsValid())
-		{
-			Debug.Log("valid");
 			CustomerArrives();
-		}
 		else
-		{
-			Debug.Log("not valid");
 			QuitGame();
-		}
 	}
 
 	private void CustomerArrives()
 	{
-		currentCustomer = customerLibrary.GetRandomCustomer();
+		currentCustomer = customerLibrary.GetRandomUnservedCustomer();
+
+		if (currentCustomer == null)
+		{
+			ShowResults();
+			return;
+		}
 
 		SoundManager.instance.PlaySingle("shop_door_bell");
 
 		teaScreen.SetActive(false);
+		resultScreen.SetActive(false);
 
 		speechText.text = currentCustomer.firstEnquiry;
 		speakerSprite.sprite = currentCustomer.sprite;
@@ -90,37 +97,79 @@ public class Game : MonoBehaviour
 		chosenIngredient = ingredient;
 
 		teaChosenButton.interactable = true;
-
-		Color selected = new Color(0.55f, 0.82f, 0.96f);
-		Color unselected = new Color(1f, 1f, 1f);
         
 		if (ingredient.itemName == "Green Tea")
 		{
-			greenTeaButton.image.color = selected;
-			rooibosButton.image.color = unselected;
-			chamomileButton.image.color = unselected;
+			greenTeaButton.image.color = selectedColour;
+			rooibosButton.image.color = unselectedColour;
+			chamomileButton.image.color = unselectedColour;
 		}
 		else if (ingredient.itemName == "Rooibos")
 		{
-			greenTeaButton.image.color = unselected;
-			rooibosButton.image.color = selected;
-			chamomileButton.image.color = unselected;
+			greenTeaButton.image.color = unselectedColour;
+			rooibosButton.image.color = selectedColour;
+			chamomileButton.image.color = unselectedColour;
 		}
 		else if (ingredient.itemName == "Chamomile")
 		{
-			greenTeaButton.image.color = unselected;
-			rooibosButton.image.color = unselected;
-			chamomileButton.image.color = selected;
+			greenTeaButton.image.color = unselectedColour;
+			rooibosButton.image.color = unselectedColour;
+			chamomileButton.image.color = selectedColour;
+		}
+	}
+    
+	public void TeaChosen()
+	{
+		greenTeaButton.image.color = unselectedColour;
+        rooibosButton.image.color = unselectedColour;
+		chamomileButton.image.color = unselectedColour;
+		teaScreen.SetActive(false);
+		speechText.text = currentCustomer.thankYou;
+
+		SetSuccess();
+
+		customerLibrary.MarkCustomerServed(currentCustomer);
+	}
+
+	private void SetSuccess()
+	{
+		if (currentCustomer.insomniaLevel <= chosenIngredient.insomniaRelief
+			&& currentCustomer.stressLevel <= chosenIngredient.stressRelief)
+		{
+			currentCustomer.successfulTea = true;
+		}
+		else
+		{
+			currentCustomer.successfulTea = false;
 		}
 	}
 
-	public void TeaChosen()
+	public void ShowResults()
 	{
-		teaScreen.SetActive(false);
-		speechText.text = currentCustomer.thankYou;
+		resultScreen.SetActive(true);
+
+		string resultString = "";
+
+		foreach (Customer customer in customerLibrary.customers)
+		{
+			if (customer.beenServed)
+			{
+				resultString += customer.firstName;
+				resultString += ": ";
+
+				if (customer.successfulTea)
+					resultString += "your tea solved their problem!";
+				else
+					resultString += "your tea didn't solve their problem this time.";
+
+				resultString += "\n";
+			}
+		}
+
+		resultText.text = resultString;
 	}
 
-	private void QuitGame()
+	public void QuitGame()
 	{
 		// save any game data here
 
