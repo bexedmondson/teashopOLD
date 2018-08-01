@@ -1,0 +1,21 @@
+﻿<Properties StartupConfiguration="{56A3EA8E-F5A4-9084-A938-17574D3E2659}|">
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SoundManager.cs">
+    <Files>
+      <File FileName="Assets/Scripts/Game.cs" Line="27" Column="2" />
+      <File FileName="Assets/Scripts/Ingredient.cs" Line="16" Column="40" />
+      <File FileName="Assets/Scripts/Customer.cs" Line="18" Column="2" />
+      <File FileName="Assets/Scripts/CustomerLibrary.cs" Line="20" Column="35" />
+      <File FileName="Assets/Scripts/IngredientLibrary.cs" Line="11" Column="18" />
+      <File FileName="Assets/Scripts/EventSystem/EventManager.cs" Line="31" Column="70" />
+      <File FileName="Assets/Scripts/EventSystem/AudioEvent.cs" Line="5" Column="23" />
+      <File FileName="Assets/Scripts/SoundManager.cs" Line="29" Column="52" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>

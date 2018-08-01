@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8583516ab1fc145879870b7136789218, type: 3}
+  m_Name: Skye
+  m_EditorClassIdentifier: 
+  firstName: Skye
+  sprite: {fileID: 21300000, guid: 6dcd4eaea863d4c95b84d0c42c69b275, type: 3}
+  stressLevel: 2
+  insomniaLevel: 0
+  firstEnquiry: Ugh, I've had the most frustrating day at the office. Is there anything
+    you can give me to help calm me down before I get home?
+  thankYou: Thanks, this smells amazing!
